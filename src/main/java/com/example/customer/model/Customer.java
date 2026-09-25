@@ -11,7 +11,7 @@ public record Customer(
         @NotBlank(message="Name cannot be empty")
         String name,
         @Email(message = "Invalid email format")
-        @NotBlank(message="Name cannot be empty")
+        @NotBlank(message="Email cannot be empty")
         String email,
         @Pattern(regexp = "^\\+?[0-9. ()-]{7,25}$", message = "Invalid phone number")
         String phone) {

@@ -30,12 +30,12 @@ public class CustomerController {
     }
 
     @GetMapping("/welcome")
-    public String getCustomerById() {
+    public String welcome() {
         return crmProperties.welcomeMessage();
     }
 
     @GetMapping("/greet/{name}")
-    public String getCustomerById(@PathVariable String name) {
+    public String greetName(@PathVariable String name) {
         Locale local = LocaleContextHolder.getLocale();
         return messageSource.getMessage("welcome.message", new Object[] {name}, local);
     }
@@ -47,7 +47,7 @@ public class CustomerController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@Valid @PathVariable UUID id) {
+    public ResponseEntity<Customer> getCustomerById( @PathVariable UUID id) {
         Customer customer = customerRepository.findById(id);
         return customer!=null?ResponseEntity.ok(customer):ResponseEntity.notFound().build();
     }

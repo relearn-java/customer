@@ -34,7 +34,7 @@ class CustomerApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(customer)
                 .exchange()
-                .expectStatus().isOk()
+                .expectStatus().isCreated()
                 .expectBody(Customer.class)
                 .value(savedCustomer ->{
                     assertThat(savedCustomer.id()).isNotNull();

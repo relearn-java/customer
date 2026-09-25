@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class CustomerRepository implements Repository<Customer, UUID> {
 
-    Map<UUID,Customer> customers = new ConcurrentHashMap<>();
+    private final Map<UUID,Customer> customers = new ConcurrentHashMap<>();
 
     @Override
     public Customer save(Customer entity) {
