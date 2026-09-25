@@ -2,6 +2,7 @@ package com.example.customer.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -116,6 +117,14 @@ public class GlobalExceptionHandler {
         // pour comprendre l'erreur (documentation, page d'aide, etc.).
         problemDetail.setType(URI.create("https://api.crm.com/errors/not-found"));
 
+        return problemDetail;
+    }
+
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ProblemDetail handleHttpMessageNotReadableException(HttpMessageNotReadableException ex){
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,"The request body is malformed or not valid JSON"+ex.getMostSpecificCause().getMessage());
+        problemDetail.setTitle("HTTP Message Not Readable");
         return problemDetail;
     }
 }

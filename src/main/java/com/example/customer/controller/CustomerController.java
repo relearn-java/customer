@@ -1,6 +1,5 @@
 package com.example.customer.controller;
 
-import com.example.customer.config.CrmProperties;
 import com.example.customer.model.Customer;
 import com.example.customer.repository.CustomerRepository;
 import jakarta.validation.Valid;
@@ -19,20 +18,14 @@ import java.util.UUID;
 public class CustomerController {
 
     private final CustomerRepository customerRepository;
-    private final CrmProperties crmProperties;
     private final MessageSource messageSource;
 
 
-    public CustomerController(CustomerRepository customerRepository, CrmProperties crmProperties,  MessageSource messageSource) {
+    public CustomerController(CustomerRepository customerRepository,  MessageSource messageSource) {
         this.customerRepository = customerRepository;
-        this.crmProperties = crmProperties;
         this.messageSource = messageSource;
     }
 
-    @GetMapping("/welcome")
-    public String welcome() {
-        return crmProperties.welcomeMessage();
-    }
 
     @GetMapping("/greet/{name}")
     public String greetName(@PathVariable String name) {
